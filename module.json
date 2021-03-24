@@ -1,0 +1,12 @@
+{
+    "name": "ez-rest",
+    "title": "Ez Rest - Emulates Pathfinder Kingmakers Rest System",
+    "description": "A simple module created as a demo for working in the Foundry Virtual Tabletop framework.",
+    "author": "tsicroxE",
+    "version": "1.0.0",
+    "minimumCoreVersion": "0.7.9",
+    "styles": ["./css/app.css"],
+
+    "scripts": ["index.js", "./scripts/ez-requestor.js"]
+
+  }
