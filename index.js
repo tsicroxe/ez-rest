@@ -4,11 +4,21 @@ class EZRest {
         this.characters = characters
     }
 
+    static async init() {
+        game.settings.register('ezrest', 'enableHunterRole', {
+          name: game.i18n.localize('EZRest.EnableHunterRole'),
+          hint: game.i18n.localize('EZRest.EnableHunterRoleHint'),
+          scope: 'client',
+          config: true,
+          type: Boolean,
+          default: true,
+          onChange: (value) => LMRTFY.onThemeChange(value)
+        });
+      }
+
     static openEZRest() {
 		if (EZRest.requestor === undefined)
-        console.log('it is undefined..')
 			EZRest.requestor = new EZRestRequestor();
-        console.log('not gettin hgere')
 		EZRest.requestor.render(true);
     }
 
@@ -31,5 +41,6 @@ class EZRest {
 }
 
 
+Hooks.once('init', EZRest.init);
 
 Hooks.on('getSceneControlButtons', EZRest.getSceneControlButtons)

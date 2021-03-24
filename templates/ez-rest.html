@@ -1,4 +1,42 @@
 
 <form autocomplete="off" onsubmit="event.preventDefault();">
-    
+    <div class="container" >
+        <div style="width: 70%; height: 400px; display: inline-block; background-color: red;">
+            <div id="div1">
+                <h1>
+                    Hunter Role
+                </h1>
+                <div ondragover="allowDrop(event)" ondrop="drop(event)" style="border: 1px solid black; width: 200px; height: 200px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="" style="width: 20%; display:inline-block;">
+
+        {{#each actors}}
+            <!-- <div draggable="true" style="z-index: 5;"> -->
+                <img src="{{this.img}}"  ondragstart="drag(event)" draggable="true" id="lmrtf-actor-{{this.id}}"/>
+                <strong><em>{{this.name}}</em></strong>
+            <!-- </div> -->
+            
+        {{/each}}
+</div>
+
+</div>
 </form>
+
+<script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+    
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+    
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.appendChild(document.getElementById(data));
+    }
+    </script>

@@ -8,16 +8,26 @@ class EZRestRequestor extends FormApplication {
         const options = super.defaultOptions;
         options.title = game.i18n.localize("EZRest.Title");
         options.id = "ezrest";
-        options.template = "modules/ez-rest/templates/index.html";
+        options.template = "modules/ez-rest/templates/ez-rest.html";
         options.closeOnSubmit = false;
         options.popOut = true;
-        options.width = 600;
-        options.height = "auto";
+        options.width = 800;
+        options.height = 1000;
         options.classes = ["ezrest", "ezrest-requestor"];
 
         return options;
     }
 
+    async getData() {
+        // Returns data to the template
+        const actors = game.actors.entities;
+        const users = game.users.entities;
+
+        return {
+            actors,
+            users,
+        };
+    }
 
     render(force, context={}) {
         // Only re-render if needed

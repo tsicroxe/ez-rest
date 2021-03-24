@@ -1,7 +1,17 @@
-.main {
-    /* width: 80%; */
-    /* height: 80%; */
-    width: 500px;
-    height: 500px;
-    background: url(../images/parchment.jpg);
+
+.container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
 }
+#div1 {
+    width: 200px;
+    height: 2000px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+  }
+
+  
