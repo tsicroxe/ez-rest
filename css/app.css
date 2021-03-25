@@ -68,7 +68,7 @@
 }
 
 .role-advantage{
-    border: 1px solid black; width: 100px; height: 100px; margin-top: auto; margin-bottom: auto; margin-left: 5px;
+    border: 1px solid black; width: 100px; height: 100px; margin-top: auto; margin-bottom: auto; margin-left: 5px; margin-right: 5px;
 }
 
 .drop {
@@ -77,4 +77,31 @@
     padding:10px;
     border:1px solid #aaaaaa;
     float: left;
+}
+
+.guard-box-inner{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: space-around;
+}
+
+.role-options {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.role-option{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
 }

@@ -6,33 +6,45 @@
 
             <h1>{{this.name}}</h1>
             {{#if this.notGuard}}
-            <div class="role">
-                <div id="{{this.name}}" class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div class="role" name="{{this.name}}">
+                <div id="{{this.name}}" name="{{this.name}}" id={{this.name}} data-dtype="object" class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
                 </div>
                 <div id="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
                     ondragover="allowDrop(event)">
                 </div>
-                <div>
-                    <label for="toggle">Auto Success?</label>
-                    <input type="checkbox" id="toggle">
-                </div>
-                <div>
-                    <label for="toggle">DC</label>
-                    <input id="DC" type="text" value="10" placeholder="">
+                <div class="role-options">
+                    <div class="role-option">
+                        <label for="toggle">Auto Success?</label>
+                        <input type="checkbox" id="{{this.name}}-auto-success" name="{{this.name}}-auto-success" data-dtype="boolean">
+                    </div>
+                    <div class="role-option">
+                        <label for="toggle">DC</label>
+                        <input id="DC" type="text" value="10" placeholder="">
+                    </div>
                 </div>
             </div>
             {{else}}
             <div class="guard-box">
                 <div>
-                    <h3>First Watch</h3>
+                <h3>First Watch</h3>
+                <div class="guard-box-inner">
+                    <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                    <div id="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
+                    ondragover="allowDrop(event)">
+                </div>
+                </div>
+            </div>  
+            <div>
+                <h3>Second Watch</h3>
+                <div class="guard-box-inner">
+                    <div id="{{this.name}}-advantage"  class="role-advantage" ondrop="drop(event)"
+                    ondragover="allowDrop(event)">
+                </div>
                     <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
                     </div>
                 </div>
-                <div>
-                    <h3>Second Watch</h3>
-                    <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    </div>
-                </div>
+            </div>
             </div>
 
 
@@ -40,9 +52,13 @@
 
 
             {{/each}}
-
+            <div class="lmrtfy-submit">
+                <button type="submit" class="lmrtfy-request-roll" name="submit" value="1"><i class="fas fa-dice"></i>{{localize "EZRest.Rest"}}</button>
+                <button type="button" class="lmrtfy-save-roll" name="submit" value="1"><i class="fas fa-download"></i>{{localize "EZRest.SavePresets"}}</button>
+            </div>
 
         </div>
+        
 </form>
 
 <div id="actors" class="actors-box">

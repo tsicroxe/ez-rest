@@ -1,18 +1,14 @@
 class EZRest {
-    
-    constructor(characters){
-        this.characters = characters
-    }
 
     static async init() {
-        game.settings.register('ezrest', 'enableHunterRole', {
+        game.settings.register('ez-rest', 'enableHunterRole', {
           name: game.i18n.localize('EZRest.EnableHunterRole'),
           hint: game.i18n.localize('EZRest.EnableHunterRoleHint'),
           scope: 'client',
           config: true,
           type: Boolean,
           default: true,
-          onChange: (value) => LMRTFY.onThemeChange(value)
+          onChange: (value) => console.log('value', value)
         });
       }
 
@@ -38,9 +34,38 @@ class EZRest {
 		}
 	}
 
+    static ready() {
+        console.log('ready is called')
+        game.socket.on('module.ez-rest', EZRest.onMessage);
+
+        EZRest.abilities = CONFIG.DND5E.abilities;
+        EZRest.skills = CONFIG.DND5E.skills;
+        EZRest.saves = CONFIG.DND5E.abilities;
+
+    }
+
+    static onMessage(data) {
+        console.log("EZRest data: ", data)
+        if (data.user === "character" &&
+            (!game.user.character || !data.actors.includes(game.user.character.id)))
+            return;
+        else if (!["character", "tokens"].includes(data.user) && data.user !== game.user.id)
+            return;
+        let actors = [];
+        if (data.user === "character")
+            actors = [game.user.character];
+        else if (data.user === "tokens")
+            actors = canvas.tokens.controlled.map(t => t.actor).filter(a => data.actors.includes(a.id));
+        else
+            actors = data.actors.map(id => game.actors.get(id));
+        actors = actors.filter(a => a);
+        if (actors.length === 0) return;
+        // new LMRTFYRoller(actors, data).render(true);
+    }
+
 }
 
 
 Hooks.once('init', EZRest.init);
-
+Hooks.on('ready', EZRest.ready);
 Hooks.on('getSceneControlButtons', EZRest.getSceneControlButtons)

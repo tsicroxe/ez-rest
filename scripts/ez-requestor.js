@@ -1,19 +1,21 @@
 class EZRestRequestor extends FormApplication {
     constructor(...args) {
         super(...args)
-        game.users.apps.push(this)
+        // game.users.apps.push(this)
     }
 
     static get defaultOptions() {
         const options = super.defaultOptions;
         options.title = game.i18n.localize("EZRest.Title");
-        options.id = "ezrest";
+        options.id = "ez-rest";
         options.template = "modules/ez-rest/templates/ez-rest.html";
         options.closeOnSubmit = false;
         options.popOut = true;
         options.width = 800;
         options.height = 1000;
-        options.classes = ["ezrest", "ezrest-requestor"];
+        options.classes = ["ez-rest", "ez-rest-requestor"];
+        console.log('options', options)
+
 
         return options;
     }
@@ -22,7 +24,12 @@ class EZRestRequestor extends FormApplication {
         // Returns data to the template
         const actors = game.actors.entities;
         const users = game.users.entities;
-        const roles = [{name: "Hunting", notGuard:true},{name: "Camp Camouflage", notGuard:true},{name: "Cooking", notGuard:true},{name: "Guards", notGuard:false}]
+        const roles = 
+                    [
+                        {name: "Hunting", notGuard:true},
+                        {name: "Camp Camouflage", notGuard:true},
+                        {name: "Cooking", notGuard:true},
+                        {name: "Guards", notGuard:false}]
 
         return {
             actors,
@@ -39,6 +46,18 @@ class EZRestRequestor extends FormApplication {
         if (force !== true && !action) return;
         return super.render(force, context);
       }
+
+    async _updateObject(event, formData) {
+
+        const socketData = {
+        }
+        console.log("updating objects", event, formData)
+
+        game.socket.emit('module.ez-rest', socketData);
+        // Send to ourselves
+        EZRest.onMessage(socketData);
+        ui.notifications.info(game.i18n.localize("Sent Update"))
+    }
     
 
 }
