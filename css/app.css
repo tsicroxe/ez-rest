@@ -6,12 +6,75 @@
 	justify-content: space-around;
 	align-items: stretch;
 	align-content: stretch;
+    background: url(images/parchment.jpg);
 }
-#div1 {
-    width: 200px;
-    height: 2000px;
-    padding: 10px;
-    border: 1px solid #aaaaaa;
-  }
 
-  
+/* .roles-box {
+    display: flex;
+    width:100%;
+    height:200px;
+    padding:10px;
+    border:1px solid #aaaaaa;
+    
+} */
+
+.roles-box {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+    width: 70%; 
+}
+
+.role {
+    width: 100%;
+    height: 200px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.actors-box {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+    border-left: 1px solid darkred;
+}
+
+.guard-box{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: space-between;
+}
+
+.ez-rest-actor {
+    width: 200px;
+    height: 200px;
+}
+
+.role-main {
+    border: 1px solid black; width: 150px; height: 150px;
+}
+
+.role-advantage{
+    border: 1px solid black; width: 100px; height: 100px; margin-top: auto; margin-bottom: auto; margin-left: 5px;
+}
+
+.drop {
+    width:50px;
+    height:50px;
+    padding:10px;
+    border:1px solid #aaaaaa;
+    float: left;
+}

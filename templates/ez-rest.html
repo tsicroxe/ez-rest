@@ -1,42 +1,92 @@
-
 <form autocomplete="off" onsubmit="event.preventDefault();">
-    <div class="container" >
-        <div style="width: 70%; height: 400px; display: inline-block; background-color: red;">
-            <div id="div1">
-                <h1>
-                    Hunter Role
-                </h1>
-                <div ondragover="allowDrop(event)" ondrop="drop(event)" style="border: 1px solid black; width: 200px; height: 200px;">
+    <div class="container">
+        <div class="roles-box">
 
+            {{#each roles}}
+
+            <h1>{{this.name}}</h1>
+            {{#if this.notGuard}}
+            <div class="role">
+                <div id="{{this.name}}" class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+                </div>
+                <div id="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
+                    ondragover="allowDrop(event)">
+                </div>
+                <div>
+                    <label for="toggle">Auto Success?</label>
+                    <input type="checkbox" id="toggle">
+                </div>
+                <div>
+                    <label for="toggle">DC</label>
+                    <input id="DC" type="text" value="10" placeholder="">
                 </div>
             </div>
+            {{else}}
+            <div class="guard-box">
+                <div>
+                    <h3>First Watch</h3>
+                    <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                </div>
+                <div>
+                    <h3>Second Watch</h3>
+                    <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    </div>
+                </div>
+            </div>
+
+
+            {{/if}}
+
+
+            {{/each}}
+
+
         </div>
-        <div class="" style="width: 20%; display:inline-block;">
-
-        {{#each actors}}
-            <!-- <div draggable="true" style="z-index: 5;"> -->
-                <img src="{{this.img}}"  ondragstart="drag(event)" draggable="true" id="lmrtf-actor-{{this.id}}"/>
-                <strong><em>{{this.name}}</em></strong>
-            <!-- </div> -->
-            
-        {{/each}}
-</div>
-
-</div>
 </form>
 
+<div id="actors" class="actors-box">
+
+    {{#each actors}}
+
+
+    <div class="ez-rest-actor" class="drop" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="{{this.id}}" src="{{this.img}}" ondragend="dragEnd(event)" draggable="true" ondragstart="drag(event)">
+    </div>
+
+    {{/each}}
+</div>
+
+</div>
+
 <script>
+
     function allowDrop(ev) {
-      ev.preventDefault();
+        ev.preventDefault();
     }
-    
+
     function drag(ev) {
-      ev.dataTransfer.setData("text", ev.target.id);
+        var el = ev.target;
+        var parent = el.getAttribute("data-parent");
+
+        if (!parent) {
+            el.setAttribute("data-parent", el.parentNode.id);
+        }
+
+        ev.dataTransfer.setData("Text", el.id);
     }
-    
+
     function drop(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      ev.target.appendChild(document.getElementById(data));
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
     }
-    </script>
+
+    function dragEnd(ev) {
+        if (ev.dataTransfer.dropEffect == "none") {
+            var parent = document.getElementById(ev.target.getAttribute("data-parent"));
+
+            parent.appendChild(ev.target);
+        }
+    }
+</script>

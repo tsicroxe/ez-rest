@@ -22,10 +22,12 @@ class EZRestRequestor extends FormApplication {
         // Returns data to the template
         const actors = game.actors.entities;
         const users = game.users.entities;
+        const roles = [{name: "Hunting", notGuard:true},{name: "Camp Camouflage", notGuard:true},{name: "Cooking", notGuard:true},{name: "Guards", notGuard:false}]
 
         return {
             actors,
             users,
+            roles
         };
     }
 
