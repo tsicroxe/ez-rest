@@ -7,7 +7,7 @@
     "minimumCoreVersion": "0.7.9",
     "styles": ["./css/app.css"],
 
-    "scripts": ["index.js", "./scripts/ez-requestor.js"],
+    "scripts": ["index.js", "./scripts/ez-requestor.js", "./scripts/ez-resolve.js"],
     "systems": ["dnd5e"],
     "languages": [
         {
@@ -15,6 +15,7 @@
             "name": "English",
             "path": "lang/en.json"
         }
-    ]
+    ],
+    "socket": true
 
   }

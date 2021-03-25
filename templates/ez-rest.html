@@ -4,7 +4,7 @@
 
             {{#each roles}}
 
-            <h1>{{this.name}}</h1>
+            <h1>{{this.title}}</h1>
             {{#if this.notGuard}}
             <div class="role" name="{{this.name}}">
                 <div id="{{this.name}}" name="{{this.name}}" id={{this.name}} data-dtype="object" class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="role-option">
                         <label for="toggle">DC</label>
-                        <input id="DC" type="text" value="10" placeholder="">
+                        <input id="{{this.name}}-DC" type="text" name="{{this.name}}-dc" value="{{this.defaultDC}}" placeholder="">
                     </div>
                 </div>
             </div>
@@ -95,7 +95,10 @@
     function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("Text");
+        console.log(data);
+        console.log(ev.target)  
         ev.target.appendChild(document.getElementById(data));
+        
     }
 
     function dragEnd(ev) {
@@ -105,4 +108,5 @@
             parent.appendChild(ev.target);
         }
     }
+
 </script>

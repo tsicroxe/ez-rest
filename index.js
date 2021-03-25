@@ -14,6 +14,7 @@ class EZRest {
 
     static openEZRest() {
 		if (EZRest.requestor === undefined)
+            console.log('undefined here?')
 			EZRest.requestor = new EZRestRequestor();
 		EZRest.requestor.render(true);
     }
@@ -44,23 +45,45 @@ class EZRest {
 
     }
 
+    static activeUsers() {
+        let users = game.users.entities
+        let activeUsers = []
+        users.forEach((user) => {
+            if(user.active){
+                activeUsers.push(user)
+            }
+        })
+        console.log(activeUsers)
+        return activeUsers;
+    }
+
     static onMessage(data) {
         console.log("EZRest data: ", data)
-        if (data.user === "character" &&
-            (!game.user.character || !data.actors.includes(game.user.character.id)))
-            return;
-        else if (!["character", "tokens"].includes(data.user) && data.user !== game.user.id)
-            return;
-        let actors = [];
-        if (data.user === "character")
-            actors = [game.user.character];
-        else if (data.user === "tokens")
-            actors = canvas.tokens.controlled.map(t => t.actor).filter(a => data.actors.includes(a.id));
-        else
-            actors = data.actors.map(id => game.actors.get(id));
-        actors = actors.filter(a => a);
-        if (actors.length === 0) return;
-        // new LMRTFYRoller(actors, data).render(true);
+        // if (data.user === "character" &&
+        //     (!game.user.character || !data.actors.includes(game.user.character.id)))
+        //     return;
+        // else if (!["character", "tokens"].includes(data.user) && data.user !== game.user.id)
+        //     return;
+        // let actors = [];
+        // if (data.user === "character")
+        //     actors = [game.user.character];
+        // else if (data.user === "tokens")
+        //     actors = canvas.tokens.controlled.map(t => t.actor).filter(a => data.actors.includes(a.id));
+        // else
+        //     actors = data.actors.map(id => game.actors.get(id));
+        // actors = actors.filter(a => a);
+        // if (actors.length === 0) return;
+        
+        let users = game.users.entities
+        let activeUsers = []
+        users.forEach((user) => {
+            if(user.active){
+                activeUsers.push(user)
+            }
+        })
+        console.log(activeUsers)
+
+        new EZRestResolve(actors, data).render(true);
     }
 
 }
