@@ -36,7 +36,6 @@ class EZRestResolve extends Application {
 
     render(force, context={}) {
         // Only re-render if needed
-        console.log('rendering ez-re-st-resolve')
         const {action, data} = context;
         if (action && !["create", "update", "delete"].includes(action)) return;
         if (action === "update" && !data.some(d => "character" in d)) return;

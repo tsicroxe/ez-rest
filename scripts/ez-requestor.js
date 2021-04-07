@@ -22,8 +22,15 @@ class EZRestRequestor extends FormApplication {
 
     async getData() {
         // Returns data to the template
-        const actors = game.actors.entities;
         const users = game.users.entities;
+        let actors = []
+        users.forEach(user => {
+            if(!user.character){
+                console.log('no character, returning early')
+                return;
+            }
+            actors.push(user.character);
+        })
         const roles = 
                     [
                         {title: "Hunting", name: 'hunting', notGuard:true, defaultDC: 10},
