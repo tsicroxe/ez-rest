@@ -69,16 +69,16 @@ class EZRestRequestor extends FormApplication {
     async _updateObject(event, formData) {
         console.log("Start of _updateObject")
         console.log('event: ', event)
-        console.log('this.form: ', this.form)
-        const socketData = {
-            formData
-        }
-        console.log("updating objects", event, formData)
+        console.log('formData: ', formData)
+        // const socketData = {
+        //     formData
+        // }
+        // console.log("updating objects", event, formData)
 
-        game.socket.emit('module.ez-rest', socketData);
-        // Send to ourselves
-        EZRest.onMessage(socketData);
-        ui.notifications.info(game.i18n.localize("Sent Update"))
+        // game.socket.emit('module.ez-rest', socketData);
+        // // Send to ourselves
+        // EZRest.onMessage(socketData);
+        // ui.notifications.info(game.i18n.localize("Sent Update"))
     }
     
 

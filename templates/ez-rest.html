@@ -12,6 +12,7 @@
                 <div id="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
                     ondragover="allowDrop(event)">
                 </div>
+                <input id="{{this.name}}-input" name="{{this.name}}-input" type="hidden" value=""/>
                 <div class="role-options">
                     <div class="role-option">
                         <label for="toggle">Auto Success?</label>
@@ -28,9 +29,9 @@
                 <div>
                 <h3>First Watch</h3>
                 <div class="guard-box-inner">
-                    <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="role-main" name="{{this.name}}" ondrop="drop(event)" ondragover="allowDrop(event)">
                     </div>
-                    <div id="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
+                    <div id="{{this.name}}-advantage" name="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
                     ondragover="allowDrop(event)">
                 </div>
                 </div>
@@ -38,10 +39,10 @@
             <div>
                 <h3>Second Watch</h3>
                 <div class="guard-box-inner">
-                    <div id="{{this.name}}-advantage"  class="role-advantage" ondrop="drop(event)"
+                    <div id="{{this.name}}-advantage" name="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
                     ondragover="allowDrop(event)">
                 </div>
-                    <div class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="role-main" name="{{this.name}}" ondrop="drop(event)" ondragover="allowDrop(event)">
                     </div>
                 </div>
             </div>
@@ -98,7 +99,11 @@
         console.log(data);
         console.log(ev.target)  
         ev.target.appendChild(document.getElementById(data));
-        
+        let input = ev.target.getAttribute('name');
+        console.log('input: ' , input)
+        input +=  '-input'
+        console.log(input)
+        document.getElementById(input).value = data
     }
 
     function dragEnd(ev) {
