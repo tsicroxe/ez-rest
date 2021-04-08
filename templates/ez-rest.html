@@ -12,11 +12,15 @@
                 <div id="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
                     ondragover="allowDrop(event)">
                 </div>
-                <input id="{{this.name}}-input" name="{{this.name}}-input" type="hidden" value=""/>
+                <input id="{{this.name}}-user" name="{{this.name}}-user" type="hidden" value=""/>
                 <div class="role-options">
                     <div class="role-option">
                         <label for="toggle">Auto Success?</label>
                         <input type="checkbox" id="{{this.name}}-auto-success" name="{{this.name}}-auto-success" data-dtype="boolean">
+                    </div>
+                    <div class="role-option">
+                        <label for="toggle">Has Advantage?</label>
+                        <input type="checkbox" id="{{this.name}}-has-advantage" name="{{this.name}}-has-advantage" data-dtype="boolean">
                     </div>
                     <div class="role-option">
                         <label for="toggle">DC</label>
@@ -76,7 +80,7 @@
         ev.target.appendChild(document.getElementById(data));
         let input = ev.target.getAttribute('name');
         console.log('input: ' , input)
-        input +=  '-input'
+        input +=  '-user'
         console.log(input)
         document.getElementById(input).value = data
     }

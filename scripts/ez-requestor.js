@@ -4,7 +4,7 @@ class EZRestRequestor extends FormApplication {
         game.users.apps.push(this)
         this.roles = 
         [
-            {title: "Hunting", name: 'hunting', defaultDC: 10},
+            {title: "Hunting", name: 'hunting', defaultDC: 15},
             {title: "Camp Camouflage", name: 'camouflage', defaultDC: 10},
             {title: "Cooking", name: 'cooking', defaultDC: 10},
             {title: "First Guard", name: 'guardOne', defaultDC: 10},
@@ -68,20 +68,121 @@ class EZRestRequestor extends FormApplication {
       }
 
     async _resolveRolls(formData) {
-        this.roles.forEach((role) => {
-            console.log(formData)
+        console.log('FORMADATAFDLKAJFADF', formData)
+
+        let results = []
+
+        this.roles.forEach(role => {
+            console.log('')
+            console.log('')
+
+            let characterId = formData[role.name + '-user']
+            if(characterId.length < 1){
+                return;
+            }
+            
+
+            let success = false;
+            let autoSuccessName = role.name + '-auto-success'
+            if(formData[autoSuccessName]){
+                success = true;
+            }
+            
+
+            
+        
+
+            let character = game.actors.get(characterId)
+            console.log(`Now rolling for ${role.name} with ${character.name}`)
+
+            let skills = character.data.data.skills
+            console.log('skills', skills)
+            let skillUsed = ''
+            switch (role.name) {
+                case "hunting":
+                    skillUsed = 'sur'
+                    break;
+                case "cooking":
+                    skillUsed = 'nat'
+                    break;
+                case "camouflage":
+                    skillUsed = 'ste'
+                    break;
+                case "guardOne":
+                    skillUsed = "prc"
+                    break;
+                case "guardTwo":
+                    skillUsed = "prc"
+                    break;
+                default: "No match"
+            }
+            console.log(skillUsed)
+            console.log(skills[skillUsed])
+
+            let rolls = []
+
+            let hasAdvantage = false;
+            let hasAdvantageName = role.name + '-has-advantage'
+            if(formData[hasAdvantageName]){
+                hasAdvantage = true;
+            }
+
+            rolls.push(Math.floor((Math.random()*20)+1));
+            if(hasAdvantage){
+                rolls.push(Math.floor((Math.random()*20)+1));
+            }
+            let modifier = skills[skillUsed].total
+            let total = 0
+            rolls.forEach(roll => {
+                console.log('roll', roll)
+                console.log('total', total)
+                if(roll > total){
+                    total = roll;
+                }
+            })
+
+            console.log('skills used total', skills[skillUsed].total)
+            total += skills[skillUsed].total
+
+            let dcName = role.name + '-dc'
+            console.log(characterId)
+
+            let dc = formData[dcName]
+
+            if(total >= dc){
+                success = true;
+            }
+
+            console.log('')
+            console.log('')
+
+            results.push({
+                autoSuccess: formData[autoSuccessName],
+                success,
+                role: role.title,
+                character,
+                skillUsed,
+                rolls,
+                dc,
+                modifier,
+                total,
+                hasAdvantage
+            })
+
+            console.log('results', results)
+
         })
+        return results;
+
     }
 
     async _updateObject(event, formData) {
         console.log('formData: ', formData)
         //here we'll execute our rolls
 
-        let roll = Math.floor((Math.random()*20)+1)
-        formData.roll = roll
 
-        let results = this._resolveRolls();
-
+        let results = await this._resolveRolls(formData);
+        formData.results = results;
         const socketData = formData
 
         game.socket.emit('module.ez-rest', socketData);

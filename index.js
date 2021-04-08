@@ -10,7 +10,49 @@ class EZRest {
           default: true,
           onChange: (value) => console.log('value', value)
         });
-      }
+
+        game.settings.register('ez-rest', 'enableCampCamouflageRole', {
+            name: game.i18n.localize('EZRest.EnableCampCamouflageRole'),
+            hint: game.i18n.localize('EZRest.EnableCampCamouflageRoleHint'),
+            scope: 'client',
+            config: true,
+            type: Boolean,
+            default: true,
+            onChange: (value) => console.log('value', value)
+          });
+
+        game.settings.register('ez-rest', 'enableCampCookRole', {
+            name: game.i18n.localize('EZRest.EnableCampCookRole'),
+            hint: game.i18n.localize('EZRest.EnableCampCookRoleHint'),
+            scope: 'client',
+            config: true,
+            type: Boolean,
+            default: true,
+            onChange: (value) => console.log('value', value)
+        });
+      
+        game.settings.register('ez-rest', 'enableGuardOneRole', {
+            name: game.i18n.localize('EZRest.EnableGuardOneRole'),
+            hint: game.i18n.localize('EZRest.EnableGuardOneRoleHint'),
+            scope: 'client',
+            config: true,
+            type: Boolean,
+            default: true,
+            onChange: (value) => console.log('value', value)
+        });
+
+        game.settings.register('ez-rest', 'enableGuardTwoRole', {
+            name: game.i18n.localize('EZRest.EnableGuardTwoRole'),
+            hint: game.i18n.localize('EZRest.EnableGuardTwoRoleHint'),
+            scope: 'client',
+            config: true,
+            type: Boolean,
+            default: true,
+            onChange: (value) => console.log('value', value)
+        });
+    }
+
+
 
     static openEZRest() {
 		if (EZRest.requestor === undefined)
@@ -58,23 +100,6 @@ class EZRest {
     }
 
     static onMessage(data) {
-        console.log("CALLING ON MESAGE")
-        console.log("EZRest data: ", data)
-        // if (data.user === "character" &&
-        //     (!game.user.character || !data.actors.includes(game.user.character.id)))
-        //     return;
-        // else if (!["character", "tokens"].includes(data.user) && data.user !== game.user.id)
-        //     return;
-        // let actors = [];
-        // if (data.user === "character")
-        //     actors = [game.user.character];
-        // else if (data.user === "tokens")
-        //     actors = canvas.tokens.controlled.map(t => t.actor).filter(a => data.actors.includes(a.id));
-        // else
-        //     actors = data.actors.map(id => game.actors.get(id));
-        // actors = actors.filter(a => a);
-        // if (actors.length === 0) return;
-        
         let users = game.users.entities
         let activeUsers = []
         users.forEach((user) => {
@@ -83,7 +108,6 @@ class EZRest {
             }
         })
         
-        console.log("data data data", data)
 
         new EZRestResolve(actors, data).render(true);
     }

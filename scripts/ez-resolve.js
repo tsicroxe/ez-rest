@@ -13,7 +13,7 @@ class EZRestResolve extends Application {
         options.closeOnSubmit = false;
         options.popOut = true;
         options.width = 400;
-        options.height = 300;
+        options.height = 400;
         options.classes = ["ez-rest", "ez-rest-requestor"];
         console.log('options', options)
 
@@ -24,13 +24,16 @@ class EZRestResolve extends Application {
         // Returns data to the template
 
                 // Only re-render if needed
-                console.log('getting data', this.data)
 
                 const data = this.data
                 const actors = this.actors
+                const results = this.data.results
+                console.log(results)
+                console.log(this.data)
         return {
             data,
-            actors
+            actors,
+            results
         }
       
     }

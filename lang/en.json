@@ -3,5 +3,22 @@
     "EZRest.Rest" : "Rest",
     "EZRest.SaveSettings" : "Save Current Settings",
     "EZRest.EnableHunterRole" : "Enable Hunter Role",
-    "EZRest.EnableHunterRoleHint" : "Hunter allows for the gathering of food using the survival skill"
+    "EZRest.EnableHunterRoleHint" : "Hunter allows for the gathering of food using the survival skill",
+
+    "EZRest.EnableCampCamouflageRole" : "Enable Camp Camouflage Role",
+    "EZRest.EnableCampCamouflageRoleHint" : "Camp Camouflage role allows for stealth to be used to hide camp",
+
+    
+    "EZRest.EnableCampCookRole" : "Enable Camp Cook Role",
+    "EZRest.EnableCampCookRoleHint" : "Cooking allows for passive benefits based on the DM",
+
+    
+    "EZRest.EnableGuardOneRole" : "Enable Guard One Role",
+    "EZRest.EnableGuardOneRoleHint" : "Allows for a Guard one role",
+
+    
+    "EZRest.EnableGuardTwoRole" : "Enable Guard Two Role",
+    "EZRest.EnableGuardTwoRoleHint" : "Guard two"
+
+
 }

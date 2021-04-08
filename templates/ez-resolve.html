@@ -1,3 +1,20 @@
 <div>
-    <p>Easy resolve {{data.roll}}</p>
+    {{#each results}}
+
+        {{#if success }}
+
+            <div style='background-color: limegreen'>
+                {{#unless autoSuccess }}<p><img id="{{this.character.id}}" src="{{this.character.data.img}}" style="width: 25px; height: 25px;"> acted as the {{role}} role with a DC of {{dc}}. They rolled {{#if hasAdvantage}}<span>with advantage getting </span>{{/if}}</span>{{rolls}} with a modifier of {{modifier}} using the {{skillUsed}} skill for a total of {{total}} and passed their check!</p> {{else}} <p><img id="{{this.character.id}}" src="{{this.character.data.img}}" style="width: 25px; height: 25px;">Auto Succeeds at {{role}} role like it ain't no thing</p>{{/unless}}
+            </div>
+
+        {{else}}
+
+        <div style='background-color: red'>
+            <p><img id="{{this.character.id}}" src="{{this.character.data.img}}" style="width: 25px; height: 25px;"> acted as the {{role}} role with a DC of {{dc}}. They rolled {{rolls}} with a modifier of {{modifier}} using the {{skillUsed}} skill for a total of {{total}} and failed their check!</p>
+        </div>
+
+
+        {{/if}}
+
+    {{/each}}
 </div>
