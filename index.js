@@ -58,6 +58,7 @@ class EZRest {
     }
 
     static onMessage(data) {
+        console.log("CALLING ON MESAGE")
         console.log("EZRest data: ", data)
         // if (data.user === "character" &&
         //     (!game.user.character || !data.actors.includes(game.user.character.id)))
@@ -81,7 +82,8 @@ class EZRest {
                 activeUsers.push(user)
             }
         })
-        console.log(activeUsers)
+        
+        console.log("data data data", data)
 
         new EZRestResolve(actors, data).render(true);
     }

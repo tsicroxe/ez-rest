@@ -2,6 +2,13 @@ class EZRestRequestor extends FormApplication {
     constructor(...args) {
         super(...args)
         game.users.apps.push(this)
+        this.roles = 
+        [
+            {title: "Hunting", name: 'hunting', defaultDC: 10},
+            {title: "Camp Camouflage", name: 'camouflage', defaultDC: 10},
+            {title: "Cooking", name: 'cooking', defaultDC: 10},
+            {title: "First Guard", name: 'guardOne', defaultDC: 10},
+            {title: "Second Guard", name: 'guardTwo', defaultDC: 10}]
     }
 
     static get defaultOptions() {
@@ -26,18 +33,11 @@ class EZRestRequestor extends FormApplication {
         let actors = []
         users.forEach(user => {
             if(!user.character){
-                console.log('no character, returning early')
                 return;
             }
             actors.push(user.character);
         })
-        const roles = 
-                    [
-                        {title: "Hunting", name: 'hunting', notGuard:true, defaultDC: 10},
-                        {title: "Camp Camouflage", name: 'camouflage', notGuard:true, defaultDC: 10},
-                        {title: "Cooking", name: 'cooking', notGuard:true, defaultDC: 10},
-                        {title: "Guards", name: 'guards', notGuard:false, defaultDC: 10}]
-
+        const roles = this.roles
         return {
             actors,
             users,
@@ -47,12 +47,13 @@ class EZRestRequestor extends FormApplication {
 
     activateListeners(html) {
         super.activateListeners(html);
-        console.log(html)
         // this.element.find(".")
         // this.element.find(".select-all").click((event) => this.setActorSelection(event, true));
         // this.element.find(".deselect-all").click((event) => this.setActorSelection(event, false));
         // this.element.find("select[name=user]").change(this._onUserChange.bind(this));
-        // this.element.find(".lmrtfy-save-roll").click(this._onSubmit.bind(this));
+        // this.element.find(".ezrest-save-presets").click((event)  => {
+        //     console.log(event)
+        // });
         // this.element.find(".lmrtfy-actor").hover(this._onHoverActor.bind(this));
         // this._onUserChange();
     }
@@ -66,19 +67,27 @@ class EZRestRequestor extends FormApplication {
         return super.render(force, context);
       }
 
-    async _updateObject(event, formData) {
-        console.log("Start of _updateObject")
-        console.log('event: ', event)
-        console.log('formData: ', formData)
-        // const socketData = {
-        //     formData
-        // }
-        // console.log("updating objects", event, formData)
+    async _resolveRolls(formData) {
+        this.roles.forEach((role) => {
+            console.log(formData)
+        })
+    }
 
-        // game.socket.emit('module.ez-rest', socketData);
-        // // Send to ourselves
-        // EZRest.onMessage(socketData);
-        // ui.notifications.info(game.i18n.localize("Sent Update"))
+    async _updateObject(event, formData) {
+        console.log('formData: ', formData)
+        //here we'll execute our rolls
+
+        let roll = Math.floor((Math.random()*20)+1)
+        formData.roll = roll
+
+        let results = this._resolveRolls();
+
+        const socketData = formData
+
+        game.socket.emit('module.ez-rest', socketData);
+        // Send to ourselves
+        EZRest.onMessage(socketData);
+        ui.notifications.info(game.i18n.localize("Sent Update"))
     }
     
 

@@ -1,6 +1,8 @@
 class EZRestResolve extends Application {
     constructor(actors, data) {
         super()
+        this.actors = actors
+        this.data = data
     }
 
     static get defaultOptions() {
@@ -20,12 +22,15 @@ class EZRestResolve extends Application {
     }
     async getData() {
         // Returns data to the template
-        const data = [
 
-        ]
+                // Only re-render if needed
+                console.log('getting data', this.data)
 
+                const data = this.data
+                const actors = this.actors
         return {
-            data
+            data,
+            actors
         }
       
     }
@@ -35,7 +40,7 @@ class EZRestResolve extends Application {
     }
 
     render(force, context={}) {
-        // Only re-render if needed
+
         const {action, data} = context;
         if (action && !["create", "update", "delete"].includes(action)) return;
         if (action === "update" && !data.some(d => "character" in d)) return;

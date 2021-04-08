@@ -5,7 +5,7 @@
             {{#each roles}}
 
             <h1>{{this.title}}</h1>
-            {{#if this.notGuard}}
+
             <div class="role" name="{{this.name}}">
                 <div id="{{this.name}}" name="{{this.name}}" id={{this.name}} data-dtype="object" class="role-main" ondrop="drop(event)" ondragover="allowDrop(event)">
                 </div>
@@ -24,38 +24,13 @@
                     </div>
                 </div>
             </div>
-            {{else}}
-            <div class="guard-box">
-                <div>
-                <h3>First Watch</h3>
-                <div class="guard-box-inner">
-                    <div class="role-main" name="{{this.name}}" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    </div>
-                    <div id="{{this.name}}-advantage" name="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
-                    ondragover="allowDrop(event)">
-                </div>
-                </div>
-            </div>  
-            <div>
-                <h3>Second Watch</h3>
-                <div class="guard-box-inner">
-                    <div id="{{this.name}}-advantage" name="{{this.name}}-advantage" class="role-advantage" ondrop="drop(event)"
-                    ondragover="allowDrop(event)">
-                </div>
-                    <div class="role-main" name="{{this.name}}" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    </div>
-                </div>
-            </div>
-            </div>
-
-
-            {{/if}}
+        
 
 
             {{/each}}
             <div class="lmrtfy-submit">
                 <button type="submit" class="lmrtfy-request-roll" name="submit" value="1"><i class="fas fa-dice"></i>{{localize "EZRest.Rest"}}</button>
-                <button type="button" class="lmrtfy-save-roll" name="submit" value="1"><i class="fas fa-download"></i>{{localize "EZRest.SavePresets"}}</button>
+                <!-- <button type="button" class="ezrest-save-presets" name="submit" value="1"><i class="fas fa-download"></i>{{localize "EZRest.SavePresets"}}</button> -->
             </div>
 
         </div>
